@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Freelancing Platform</title>
+  <style>
+    :root {
+      --primary-color: #6A5ACD;
+      --secondary-color: #333333;
+      --accent-color: #FF6B6B;
+      --text-light: #FFFFFF;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Roboto', sans-serif;
+      color: var(--secondary-color);
+      background-color: #F5F5F5;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Header */
+    header {
+      background-color: var(--primary-color);
+      padding: 20px 0;
+    }
+
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      color: var(--text-light);
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 30px;
+    }
+
+    nav a {
+      color: var(--text-light);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    nav a:hover {
+      color: var(--accent-color);
+    }
+
+    /* Hero */
+    .hero {
+      background-image: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+      color: var(--text-light);
+      padding: 100px 0;
+      text-align: center;
+    }
+
+    .hero-content {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .hero-title {
+      font-size: 48px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    .hero-subtitle {
+      font-size: 20px;
+      margin-bottom: 40px;
+    }
+
+    /* Register Section */
+    .register-section {
+      padding: 60px 0;
+      text-align: center;
+    }
+
+    .register-form {
+      margin: 20px 0;
+    }
+
+    .register-form input,
+    .register-form select,
+    .register-form button {
+      padding: 10px;
+      margin: 10px;
+      font-size: 16px;
+      border-radius: 6px;
+      border: 1px solid #ddd;
+    }
+
+    .register-form button {
+      background-color: var(--accent-color);
+      color: var(--text-light);
+      cursor: pointer;
+    }
+
+    .register-form button:hover {
+      background-color: var(--primary-color);
+    }
+
+    /* Top 5 Freelancers Section */
+    .top-freelancers {
+      padding: 60px 0;
+      text-align: center;
+    }
+
+    .freelancer-list {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .freelancer-card {
+      background-color: #fff;
+      border: 1px solid #ddd;
+      padding: 20px;
+      margin: 10px;
+      border-radius: 6px;
+      width: 250px;
+    }
+
+    .freelancer-card h3 {
+      margin-bottom: 10px;
+    }
+
+    .freelancer-card p {
+      margin: 5px 0;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Freelancing Platform</h1>
+    <nav>
+      <a href="#profiles">Freelancer Profiles</a>
+      <a href="#client-dashboard">Client Dashboards</a>
+      <a href="#ai-matchmaking">AI Matchmaking</a>
+      <a href="#payments">Secure Payments</a>
+      <a href="#communication">Communication Hub</a>
+    </nav>
+  </header>
+
+  <!-- Registration Section -->
+  <section id="register" class="register-section">
+    <h2>Register as a Freelancer</h2>
+    <form id="register-form" class="register-form">
+      <input type="text" id="name" placeholder="Your Name" required>
+      <input type="number" id="experience" placeholder="Years of Experience" required>
+      <input type="text" id="skills" placeholder="Skills (comma separated)" required>
+      <button type="button" onclick="registerFreelancer()">Register</button>
+    </form>
+  </section>
+
+  <!-- Back Button -->
+  <section id="back-button-section" class="back-button-section" style="text-align: center; margin-top: 20px;">
+    <a href="index.html">
+      <button style="padding: 10px 20px; background-color: var(--primary-color); color: white; border-radius: 6px; border: none; cursor: pointer;">
+        Back to Home
+      </button>
+    </a>
+  </section>
+
+  <!-- Display Top 5 Freelancers -->
+  <section id="top-freelancers" class="top-freelancers">
+    <h2>Top 5 Freelancers Based on Experience</h2>
+    <div class="freelancer-list" id="freelancer-list"></div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Freelancing Platform. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Array to store registered freelancers
+    const freelancers = [];
+
+    // Register a new freelancer
+    function registerFreelancer() {
+      const name = document.getElementById("name").value;
+      const experience = parseInt(document.getElementById("experience").value);
+      const skills = document.getElementById("skills").value.split(',').map(skill => skill.trim());
+
+      // Create a new freelancer object
+      const newFreelancer = { name, experience, skills };
+
+      // Add freelancer to the freelancers array
+      freelancers.push(newFreelancer);
+
+      // Clear the form
+      document.getElementById("register-form").reset();
+
+      // Display the top 5 freelancers
+      displayTopFreelancers();
+    }
+
+    // Display top 5 freelancers sorted by experience
+    function displayTopFreelancers() {
+      // Sort freelancers by experience in descending order
+      const sortedFreelancers = [...freelancers].sort((a, b) => b.experience - a.experience);
+
+      // Get the top 5 freelancers
+      const topFreelancers = sortedFreelancers.slice(0, 5);
+
+      // Get the container for freelancer list
+      const freelancerList = document.getElementById("freelancer-list");
+
+      // Clear previous list
+      freelancerList.innerHTML = '';
+
+      // Display each freelancer in the list
+      topFreelancers.forEach(freelancer => {
+        const freelancerCard = document.createElement("div");
+        freelancerCard.classList.add("freelancer-card");
+
+        // Create a clickable link to the freelancer details page
+        const freelancerLink = document.createElement("a");
+        freelancerLink.href = `freelancer-details.html?name=${encodeURIComponent(freelancer.name)}&experience=${freelancer.experience}&skills=${encodeURIComponent(freelancer.skills.join(', '))}`;
+        freelancerLink.style.textDecoration = 'none'; // To remove the underline
+
+        freelancerCard.innerHTML = `
+          <h3>${freelancer.name}</h3>
+          <p><strong>Experience:</strong> ${freelancer.experience} years</p>
+          <p><strong>Skills:</strong> ${freelancer.skills.join(', ')}</p>
+        `;
+
+        // Append the freelancer card to the link, and then add to the list
+        freelancerLink.appendChild(freelancerCard);
+        freelancerList.appendChild(freelancerLink);
+      });
+    }
+  </script>
+</body>
+</html>
+

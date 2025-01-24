@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TalentAI Connect - Smart Project Marketplace</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-purple-100">
+    <div id="app" class="container mx-auto px-4 py-12">
+        <div class="bg-white shadow-2xl rounded-2xl overflow-hidden transform transition-all hover:scale-105">
+            <div class="bg-gradient-to-r from-blue-600 to-purple-600 p-8 text-center">
+                <h1 class="text-4xl font-extrabold text-white mb-4">Freelancer</h1>
+                <p class="text-blue-100 text-xl">Project Matchmaking Platform</p>
+            </div>
+
+            <div class="p-8">
+                <form @submit.prevent="submitProject" class="space-y-6">
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">Project Title</label>
+                            <input 
+                                v-model="projectTitle"
+                                type="text" 
+                                placeholder="Enter project title" 
+                                class="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
+                                required
+                            >
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">Project Category</label>
+                            <select 
+                                v-model="projectCategory"
+                                class="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
+                                required
+                            >
+                                <option value="">Select Category</option>
+                                <option>Web Development</option>
+                                <option>Mobile App</option>
+                                <option>AI/Machine Learning</option>
+                                <option>Blockchain</option>
+                                <option>Design</option>
+                                
+                            </select>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">Project Description</label>
+                        <textarea 
+                            v-model="projectDescription"
+                            placeholder="AI-Enhanced Description: Describe your project in detail. Our AI will help refine your requirements!"
+                            class="w-full px-4 py-3 border border-gray-300 rounded-md h-40 focus:ring-2 focus:ring-blue-500"
+                            required
+                        ></textarea>
+                        <button 
+                            @click.prevent="enhanceDescription"
+                            class="mt-2 bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600"
+                        >
+                            🤖 AI Description Enhancer
+                        </button>
+                    </div>
+
+                    <div class="grid md:grid-cols-3 gap-6">
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">Budget Range (USD)</label>
+                            <input 
+                                v-model="projectBudget"
+                                type="number" 
+                                placeholder="Estimated Budget" 
+                                class="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
+                                required
+                            >
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">Project Deadline</label>
+                            <input 
+                                v-model="projectDeadline"
+                                type="date" 
+                                class="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
+                                required
+                            >
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">Complexity Level</label>
+                            <select 
+                                v-model="projectComplexity"
+                                class="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
+                                required
+                            >
+                                <option value="">Select Complexity</option>
+                                <option>Beginner</option>
+                                <option>Intermediate</option>
+                                <option>Advanced</option>
+                                <option>Expert</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">Required Skills</label>
+                        <div class="flex flex-wrap gap-2">
+                            <span 
+                                v-for="skill in suggestedSkills" 
+                                :key="skill"
+                                @click="toggleSkill(skill)"
+                                class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full cursor-pointer hover:bg-blue-200"
+                                :class="{'bg-blue-500 text-white': selectedSkills.includes(skill)}"
+                            >
+                                {{ skill }}
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="text-center">
+                        <button 
+                            type="submit" 
+                            class="w-full md:w-auto bg-gradient-to-r from-blue-600 to-purple-600 text-white px-12 py-4 rounded-lg hover:opacity-90 transition duration-300 text-xl font-bold"
+                        >
+                            🚀 Post Project
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="mt-8 text-center text-gray-600">
+            © 2025 Freelancer 
+        </div>
+    </div>
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                projectTitle: '',
+                projectCategory: '',
+                projectDescription: '',
+                projectBudget: null,
+                projectDeadline: null,
+                projectComplexity: '',
+                suggestedSkills: [
+                    'React', 'Python', 'Machine Learning', 
+                    'Cloud Computing', 'Blockchain', 'UI/UX Design'
+                ],
+                selectedSkills: []
+            },
+            methods: {
+                toggleSkill(skill) {
+                    const index = this.selectedSkills.indexOf(skill);
+                    if (index > -1) {
+                        this.selectedSkills.splice(index, 1);
+                    } else {
+                        this.selectedSkills.push(skill);
+                    }
+                },
+                enhanceDescription() {
+                    // Simulated AI enhancement
+                    alert('AI is refining your project description! 🤖✨');
+                },
+                submitProject() {
+                    // Project submission logic
+                    alert('Project Posted Successfully! AI Matching Initiated. 🎉');
+                }
+            }
+        });
+    </script>
+</body>
+</html>

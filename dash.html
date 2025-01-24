@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Freelancer Hub</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #3B82F6; /* Corporate blue */
+            --secondary-color: #10B981; /* Fresh green */
+            --background-color: #F4F7F6; /* Light background */
+            --text-color: #1F2937; /* Dark text */
+            --accent-color: #FF6B6B; /* Accent red */
+            --button-hover-color: #059669; /* Hover green */
+            --border-color: #ddd;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: var(--background-color);
+            line-height: 1.6;
+            color: var(--text-color);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background-color: #ffffff;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            font-size: 2rem;
+            margin: 0;
+        }
+
+        .platform-grid {
+            display: grid;
+            grid-template-columns: 1fr 3fr;
+            gap: 20px;
+        }
+
+        .skills-filter {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .job-listings {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .search-bar {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 10px 40px 10px 20px;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+        }
+
+        .job-card {
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: box-shadow 0.3s ease;
+        }
+
+        .job-card:hover {
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .job-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .job-skills {
+            display: flex;
+            gap: 5px;
+        }
+
+        .skill-tag {
+            background-color: #e6f2ff;
+            color: var(--primary-color);
+            padding: 2px 8px;
+            border-radius: 20px;
+            font-size: 0.8em;
+        }
+
+        .job-details {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+        }
+
+        .job-meta {
+            display: flex;
+            gap: 15px;
+            color: #666;
+        }
+
+        .apply-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .apply-btn:disabled {
+            background-color: var(--button-hover-color);
+            cursor: not-allowed;
+        }
+
+        .apply-btn:hover {
+            background-color: var(--button-hover-color);
+        }
+
+        .search-bar input::placeholder {
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Freelancer Hub</h1>
+        </header>
+
+        <div class="platform-grid">
+            <div class="skills-filter" id="skillsFilter">
+                <h2>Filter Skills</h2>
+                <!-- Skills will be dynamically added here -->
+            </div>
+
+            <div class="job-listings">
+                <div class="search-bar">
+                    <input type="text" id="searchInput" placeholder="Search jobs...">
+                </div>
+                <div id="jobListings">
+                    <!-- Jobs will be dynamically added here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const JobService = {
+            jobs: [
+                {
+                    id: 1,
+                    title: 'React Frontend Developer',
+                    description: 'Looking for an experienced React developer to build modern web applications.',
+                    company: 'TechInnovate Solutions',
+                    skills: ['React', 'JavaScript', 'TypeScript'],
+                    budget: '$2000-$3000',
+                    duration: '1-2 months'
+                },
+                {
+                    id: 2,
+                    title: 'UX/UI Designer',
+                    description: 'Design intuitive user interfaces for a mobile application.',
+                    company: 'CreativeMinds Agency',
+                    skills: ['Figma', 'Adobe XD', 'User Research'],
+                    budget: '$1500-$2500',
+                    duration: '3-4 weeks'
+                },
+                {
+                    id: 3,
+                    title: 'Python Backend Developer',
+                    description: 'Build scalable APIs and backend systems using Python and Django.',
+                    company: 'CodeBuilders Ltd.',
+                    skills: ['Python', 'Django', 'RESTful APIs'],
+                    budget: '$3000-$4500',
+                    duration: '2-3 months'
+                },
+                {
+                    id: 4,
+                    title: 'Full Stack Developer',
+                    description: 'Build full stack web applications using Node.js and React.',
+                    company: 'TechWorks Corp.',
+                    skills: ['Node.js', 'React', 'MongoDB'],
+                    budget: '$4000-$6000',
+                    duration: '4-6 months'
+                },
+            ],
+
+            getJobs() {
+                return this.jobs;
+            },
+
+            applyToJob(jobId) {
+                console.log(`Applied to job ${jobId}`);
+                return true;
+            }
+        };
+
+        class FreelancerPlatform {
+            constructor() {
+                this.jobs = JobService.getJobs();
+                this.appliedJobs = [];
+                this.selectedSkills = [];
+                this.availableSkills = [
+                    'React', 'JavaScript', 'TypeScript', 
+                    'Figma', 'UI/UX', 'Python', 
+                    'Node.js', 'Machine Learning'
+                ];
+
+                this.init();
+            }
+
+            init() {
+                this.renderSkillsFilter();
+                this.renderJobListings();
+                this.setupEventListeners();
+            }
+
+            renderSkillsFilter() {
+                const filterContainer = document.getElementById('skillsFilter');
+                this.availableSkills.forEach(skill => {
+                    const skillDiv = document.createElement('div');
+                    skillDiv.innerHTML = `
+                        <input type="checkbox" id="${skill}" />
+                        <label for="${skill}">${skill}</label>
+                    `;
+                    skillDiv.querySelector('input').addEventListener('change', () => this.toggleSkill(skill));
+                    filterContainer.appendChild(skillDiv);
+                });
+            }
+
+            toggleSkill(skill) {
+                this.selectedSkills = this.selectedSkills.includes(skill)
+                    ? this.selectedSkills.filter(s => s !== skill)
+                    : [...this.selectedSkills, skill];
+                this.renderJobListings();
+            }
+
+            renderJobListings() {
+                const listingsContainer = document.getElementById('jobListings');
+                const searchInput = document.getElementById('searchInput');
+                const searchTerm = searchInput.value.toLowerCase();
+
+                listingsContainer.innerHTML = '';
+
+                const filteredJobs = this.jobs.filter(job => 
+                    job.title.toLowerCase().includes(searchTerm) &&
+                    (this.selectedSkills.length === 0 || 
+                     this.selectedSkills.some(skill => job.skills.includes(skill)))
+                );
+
+                filteredJobs.forEach(job => {
+                    const jobCard = document.createElement('div');
+                    jobCard.className = 'job-card';
+                    jobCard.innerHTML = this.createJobCardHTML(job);
+                    jobCard.querySelector('.apply-btn')?.addEventListener('click', () => this.applyToJob(job.id));
+                    listingsContainer.appendChild(jobCard);
+                });
+            }
+
+            createJobCardHTML(job) {
+                const isApplied = this.appliedJobs.includes(job.id);
+                return `
+                    <div class="job-header">
+                        <div>
+                            <h3>${job.title}</h3>
+                            <p>${job.company}</p>
+                        </div>
+                        <div class="job-skills">
+                            ${job.skills.map(skill => `<span class="skill-tag">${skill}</span>`).join('')}
+                        </div>
+                    </div>
+                    <p>${job.description}</p>
+                    <div class="job-details">
+                        <div class="job-meta">
+                            <div>💰 ${job.budget}</div>
+                            <div>⏰ ${job.duration}</div>
+                        </div>
+                        <button class="apply-btn" ${isApplied ? 'disabled' : ''}>
+                            ${isApplied ? '✅ Applied' : '➡️ Apply Now'}
+                        </button>
+                    </div>
+                `;
+            }
+
+            applyToJob(jobId) {
+                const result = JobService.applyToJob(jobId);
+                if (result && !this.appliedJobs.includes(jobId)) {
+                    this.appliedJobs.push(jobId);
+                    this.renderJobListings();
+                    window.location.href = 'apply.html';
+                }
+            }
+
+            setupEventListeners() {
+                document.getElementById('searchInput').addEventListener('input', () => this.renderJobListings());
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => new FreelancerPlatform());
+    </script>
+</body>
+</html>

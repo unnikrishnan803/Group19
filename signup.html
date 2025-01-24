@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Page</title>
+    <style>
+        :root {
+            --primary-color: #6A5ACD;
+            --secondary-color: #333333;
+            --accent-color: #FF6B6B;
+            --text-light: #FFFFFF;
+            --success-color: #28a745;
+            --error-color: #dc3545;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            color: var(--secondary-color);
+            background-color: #F5F5F5;
+        }
+
+        /* Header */
+        header {
+            background-color: var(--primary-color);
+            padding: 20px 0;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .logo {
+            color: var(--text-light);
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Hero Section */
+        .hero {
+            background-image: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            color: var(--text-light);
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero-title {
+            font-size: 48px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .hero-subtitle {
+            font-size: 20px;
+            margin-bottom: 40px;
+        }
+
+        /* Registration Form */
+        .register-form {
+            background-color: var(--text-light);
+            border-radius: 10px;
+            padding: 40px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            margin-top: 40px;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 8px;
+            color: var(--secondary-color);
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid var(--primary-color);
+            border-radius: 6px;
+            font-size: 16px;
+            color: var(--secondary-color);
+            background-color: var(--text-light);
+            transition: border-color 0.3s ease;
+        }
+
+        .input-group input:focus {
+            border-color: var(--accent-color);
+            outline: none;
+        }
+
+        .btn-primary {
+            background-color: var(--accent-color);
+            color: var(--text-light);
+            width: 100%;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            text-transform: uppercase;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-color);
+        }
+
+        p {
+            margin-top: 20px;
+            color: var(--secondary-color);
+        }
+
+        p a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        p a:hover {
+            color: var(--accent-color);
+        }
+
+        footer {
+            background-color: var(--secondary-color);
+            color: var(--text-light);
+            padding: 30px 0;
+            text-align: center;
+        }
+
+        .feedback {
+            margin-top: 10px;
+            font-size: 14px;
+            display: none;
+        }
+
+        .success {
+            color: var(--success-color);
+        }
+
+        .error {
+            color: var(--error-color);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-content">
+            <div class="logo">Freelancer</div>
+            <nav>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">Create an Account</h1>
+            <p class="hero-subtitle">Please fill in your details to register</p>
+
+            <!-- Registration Form -->
+            <div class="register-form">
+                <form id="registerForm" action="javascript:void(0)">
+                    <div class="input-group">
+                        <label for="firstname">First Name</label>
+                        <input type="text" id="firstname" name="firstname" placeholder="Enter First Name" required>
+                        <div id="firstNameFeedback" class="feedback error"></div>
+                    </div>
+                    <div class="input-group">
+                        <label for="lastname">Last Name</label>
+                        <input type="text" id="lastname" name="lastname" placeholder="Enter Last Name" required>
+                        <div id="lastNameFeedback" class="feedback error"></div>
+                    </div>
+                    <div class="input-group">
+                        <label for="email">Gmail Address</label>
+                        <input type="email" id="email" name="email" placeholder="Enter Gmail" required>
+                        <div id="emailFeedback" class="feedback error"></div>
+                    </div>
+                    <div class="input-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="text" id="phone" name="phone" placeholder="Enter Phone Number" required>
+                        <div id="phoneFeedback" class="feedback error"></div>
+                    </div>
+                    <button type="submit" class="btn-primary">Register</button>
+                </form>
+                <p>Already have an account? <a href="loogion.html">Login here</a></p>
+            </div>
+
+            <div id="successMessage" class="feedback success" style="display:none;">Registration Successful! Redirecting...</div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Freelancer</p>
+    </footer>
+
+    <script>
+        // Function to validate email (Gmail)
+        function validateEmail(email) {
+            const regex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
+            return regex.test(email);
+        }
+
+        // Function to validate phone number (basic format)
+        function validatePhone(phone) {
+            const regex = /^\d{10}$/; // Assuming a 10-digit phone number
+            return regex.test(phone);
+        }
+
+        // Handle form submission
+        document.getElementById('registerForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent form from submitting
+
+            // Clear previous feedback messages
+            document.querySelectorAll('.feedback').forEach((el) => el.style.display = 'none');
+
+            let isValid = true;
+
+            // First Name validation (only alphabets and not empty)
+            const firstName = document.getElementById('firstname').value;
+            if (!/^[A-Za-z]+$/.test(firstName)) {
+                document.getElementById('firstNameFeedback').textContent = "First name must contain only letters.";
+                document.getElementById('firstNameFeedback').style.display = 'block';
+                isValid = false;
+            }
+
+            // Last Name validation (only alphabets and not empty)
+            const lastName = document.getElementById('lastname').value;
+            if (!/^[A-Za-z]+$/.test(lastName)) {
+                document.getElementById('lastNameFeedback').textContent = "Last name must contain only letters.";
+                document.getElementById('lastNameFeedback').style.display = 'block';
+                isValid = false;
+            }
+
+            // Email validation (must be a valid Gmail address)
+            const email = document.getElementById('email').value;
+            if (!validateEmail(email)) {
+                document.getElementById('emailFeedback').textContent = "Please enter a valid Gmail address.";
+                document.getElementById('emailFeedback').style.display = 'block';
+                isValid = false;
+            }
+
+            // Phone number validation (must be 10 digits)
+            const phone = document.getElementById('phone').value;
+            if (!validatePhone(phone)) {
+                document.getElementById('phoneFeedback').textContent = "Phone number must be 10 digits.";
+                document.getElementById('phoneFeedback').style.display = 'block';
+                isValid = false;
+            }
+
+            // If valid, show success message and redirect
+            if (isValid) {
+                document.getElementById('successMessage').style.display = 'block';
+                setTimeout(function() {
+                    window.location.href = 'loogion.html'; // Redirect to login page after 3 seconds
+                }, 3000);
+            }
+        });
+    </script>
+
+</body>
+</html>

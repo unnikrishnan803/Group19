@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        :root {
+            --primary-color: #6A5ACD;
+            --secondary-color: #333333;
+            --accent-color: #FF6B6B;
+            --text-light: #FFFFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            color: var(--secondary-color);
+            background-color: #F5F5F5;
+        }
+
+        /* Header */
+        header {
+            background-color: var(--primary-color);
+            padding: 20px 0;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .logo {
+            color: var(--text-light);
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Hero Section */
+        .hero {
+            background-image: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            color: var(--text-light);
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero-title {
+            font-size: 48px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .hero-subtitle {
+            font-size: 20px;
+            margin-bottom: 40px;
+        }
+
+        /* Login Form */
+        .login-form {
+            background-color: var(--text-light);
+            border-radius: 10px;
+            padding: 40px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            margin-top: 40px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 8px;
+            color: var(--secondary-color);
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid var(--primary-color);
+            border-radius: 6px;
+            font-size: 16px;
+            color: var(--secondary-color);
+            background-color: var(--text-light);
+            transition: border-color 0.3s ease;
+        }
+
+        .input-group input:focus {
+            border-color: var(--accent-color);
+            outline: none;
+        }
+
+        .btn-primary {
+            background-color: var(--accent-color);
+            color: var(--text-light);
+            width: 100%;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            text-transform: uppercase;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-color);
+        }
+
+        p {
+            margin-top: 20px;
+            color: var(--secondary-color);
+        }
+
+        p a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        p a:hover {
+            color: var(--accent-color);
+        }
+
+        footer {
+            background-color: var(--secondary-color);
+            color: var(--text-light);
+            padding: 30px 0;
+            text-align: center;
+        }
+
+        .error-message {
+            color: red;
+            font-size: 14px;
+            margin-top: 10px;
+            display: none;
+        }
+
+        .btn-back {
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            width: 100%;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            text-transform: uppercase;
+            margin-top: 20px;
+        }
+
+        .btn-back:hover {
+            background-color: var(--accent-color);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-content">
+            <div class="logo">Freelancer</div>
+            <nav>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">Welcome </h1>
+            <p class="hero-subtitle">Please login to continue</p>
+
+            <!-- Login Form -->
+            <div class="login-form">
+                <form id="loginForm" action="javascript:void(0)">
+                    <div class="input-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" required>
+                    </div>
+                    <button type="submit" class="btn-primary">Login</button>
+                    <p>Don't have an account? <a href="signup.html">Sign up</a></p>
+                    <div id="errorMessage" class="error-message">Invalid credentials. Please check your email and password.</div>
+                </form>
+                <button class="btn-back" onclick="window.location.href='index.html'">Back to Home</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Freelancer</p>
+    </footer>
+
+    <script>
+        // Handle form submission
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent form from submitting
+
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const errorMessage = document.getElementById('errorMessage');
+
+            // Check if email length is greater than or equal to 5 characters
+            if (email.length < 5) {
+                errorMessage.textContent = "Email must be at least 5 characters long.";
+                errorMessage.style.display = 'block';
+                return;
+            }
+
+            // Check if password is exactly "password"
+            if (password !== "password") {
+                errorMessage.textContent = "Password is incorrect.";
+                errorMessage.style.display = 'block';
+                return;
+            }
+
+            // If both conditions are met, redirect to bcome.html
+            window.location.href = 'bcome.html';
+        });
+    </script>
+
+</body>
+</html>

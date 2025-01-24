@@ -1,0 +1,175 @@
+:root {
+    --primary-color: #6A5ACD; /* Main color for headers and buttons */
+    --secondary-color: #333333; /* Dark color for text and backgrounds */
+    --accent-color: #FF6B6B; /* Accent color for highlights and buttons */
+    --text-light: #FFFFFF; /* Light color for text on dark backgrounds */
+}
+
+* {
+    margin: 0; /* Remove default margin */
+    padding: 0; /* Remove default padding */
+    box-sizing: border-box; /* Include padding and border in element's total width and height */
+}
+
+body {
+    font-family: 'Roboto', sans-serif; /* Set a clean, modern font */
+    color: var(--secondary-color); /* Default text color */
+    background-color: #F5F5F5; /* Light background color for the body */
+}
+
+.container {
+    max-width: 1200px; /* Limit the maximum width of the container */
+    margin: 0 auto; /* Center the container */
+    padding: 0 20px; /* Add horizontal padding */
+}
+
+/* Header Styles */
+header {
+    background-color: var(--primary-color); /* Header background color */
+    padding: 20px 0; /* Vertical padding for the header */
+}
+
+.header-content {
+    display: flex; /* Use flexbox for layout */
+    justify-content: space-between; /* Space between logo and navigation */
+    align-items: center; /* Center items vertically */
+}
+
+.logo {
+    color: var(--text-light); /* Logo text color */
+    font-size: 24px; /* Logo font size */
+    font-weight: bold; /* Bold font for the logo */
+}
+
+nav ul {
+    display: flex; /* Use flexbox for navigation items list-style: none; /* Remove bullet points */
+    gap: 30px; /* Space between navigation items */
+}
+
+nav a {
+    color: var(--text-light); /* Navigation link color */
+    text-decoration: none; /* Remove underline from links */
+    transition: color 0.3s ease; /* Smooth color transition on hover */
+}
+
+nav a:hover {
+    color: var(--accent-color); /* Change color on hover */
+}
+
+/* Call to Action Buttons */
+.cta-buttons {
+    display: flex; /* Use flexbox for button layout */
+    gap: 15px; /* Space between buttons */
+}
+
+.btn {
+    padding: 12px 24px; /* Button padding */
+    border-radius: 6px; /* Rounded corners for buttons */
+    font-weight: 500; /* Medium font weight */
+    transition: all 0.3s ease; /* Smooth transition for all properties */
+    cursor: pointer; /* Change cursor to pointer on hover */
+    border: none; /* Remove default border */
+    text-transform: uppercase; /* Uppercase text for buttons */
+}
+
+.btn-primary {
+    background-color: var(--accent-color); /* Primary button background */
+    color: var(--text-light); /* Primary button text color */
+}
+
+.btn-secondary {
+    background-color: transparent; /* Transparent background for secondary button */
+    border: 2px solid var(--accent-color); /* Border for secondary button */
+    color: var(--accent-color); /* Text color for secondary button */
+}
+
+/* Hero Section */
+.hero {
+    background-image: linear-gradient(to right, var(--primary-color), var(--secondary-color)); /* Gradient background */
+    color: var(--text-light); /* Text color for hero section */
+    padding: 100px 0; /* Vertical padding for hero section */
+    text-align: center; /* Center text */
+}
+
+.hero-content {
+    max-width: 800px; /* Limit width of hero content */
+    margin: 0 auto; /* Center hero content */
+}
+
+.hero-title {
+    font-size: 48px; /* Large font size for title */
+    font-weight: bold; /* Bold font for title */
+    margin-bottom: 20px; /* Space below title */
+}
+
+.hero-subtitle {
+    font-size: 20px; /* Font size for subtitle */
+    margin-bottom: 40px; /* Space below subtitle */
+}
+
+/* Jobs Section */
+#jobs {
+    margin: 40px 0; /* Margin for jobs section */
+}
+
+#jobs h2 {
+    font-size: 36px; /* Font size for jobs section title */
+    margin-bottom: 20px; /* Space below title */
+}
+
+#job-list {
+    list-style: none; /* Remove bullet points from job list */
+}
+
+#job-list li {
+    background-color: var(--text-light); /* Background color for job listings */
+    padding: 15px; /* Padding for job listings */
+    margin-bottom: 10px; /* Space between job listings */
+    border-radius: 6px; /* Rounded corners for job listings */
+}
+
+/* Post Job Form */
+#post-job {
+    margin: 40px 0; /* Margin for post job section */
+}
+
+#post-job h2 {
+    font-size: 36px; /* Font size for post job section title */
+    margin-bottom: 20px; /* Space below title */
+}
+
+#job-form {
+    display: flex; /* Use flexbox for form layout */
+    flex-direction: column; /* Stack form elements vertically */
+}
+
+#job-form input,
+#job-form textarea,
+#job-form select {
+    margin-bottom: 15px; /* Space below form elements */
+    padding: 10px; /* Padding for form elements */
+    border: 1px solid var(--secondary-color); /* Border for form elements */
+    border-radius: 4px; /* Rounded corners for form elements */
+}
+
+#job-form button {
+    background-color: var(--primary-color); /* Button background color */
+    color: var(--text-light); /* Button text color */
+    border: none; /* Remove default border */
+    padding: 12px; /* Button padding */
+    border-radius: 6px; /* Rounded corners for button */
+    cursor: pointer; /* Change cursor to pointer on hover */
+    transition: background-color 0.3s ease; /* Smooth background color transition */
+}
+
+#job-form button:hover {
+    background-color: var(--accent-color); /* Change background color on hover */
+}
+
+/* Footer Styles */
+footer {
+    background-color: var(--secondary-color); /* Footer background color */
+    color: var(--text-light); /* Footer text color */
+    padding: 30px 0; /* Vertical padding for footer */
+    text-align: center; /* Center text */
+}

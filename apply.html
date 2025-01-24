@@ -1,0 +1,371 @@
+<<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Freelancer - Professional Job Platform</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style id="themeStyles">
+        :root {
+            --primary-color: #3B82F6;
+            --secondary-color: #10B981;
+            --background-color: #F4F7F6;
+            --text-color: #1F2937;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            transition: all 0.3s ease;
+        }
+        .theme-corporate {
+            --primary-color: #3B82F6;
+            --secondary-color: #6366F1;
+            --background-color: #F3F4F6;
+            --text-color: #1F2937;
+        }
+        .theme-creative {
+            --primary-color: #8B5CF6;
+            --secondary-color: #EC4899;
+            --background-color: #FDF4FF;
+            --text-color: #4A5568;
+        }
+        .theme-minimal {
+            --primary-color: #10B981;
+            --secondary-color: #059669;
+            --background-color: #F0F9FF;
+            --text-color: #1F2937;
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        }
+        .theme-button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .theme-button:hover {
+            transform: scale(1.05);
+        }
+
+        /* New CSS */
+        :root {
+            --primary-color: #6A5ACD;
+            --secondary-color: #333333;
+            --accent-color: #FF6B6B;
+            --text-light: #FFFFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            color: var(--secondary-color);
+            background-color: #F5F5F5;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background-color: var(--primary-color);
+            padding: 20px 0;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: var(--text-light);
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--accent-color);
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            text-transform: uppercase;
+        }
+
+        .btn-primary {
+            background-color: var(--accent-color);
+            color: var(--text-light);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            border: 2px solid var(--accent-color);
+            color: var(--accent-color);
+        }
+
+        /* Hero */
+        .hero {
+            background-image: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            color: var(--text-light);
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero-title {
+            font-size: 48px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .hero-subtitle {
+            font-size: 20px;
+            margin-bottom: 40px;
+        }
+
+        /* Brands */
+        .brands {
+            background-color: var(--text-light);
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .brand-logos {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 50px;
+            margin-top: 30px;
+        }
+
+        .brand-logos img {
+            max-height: 50px;
+            filter: grayscale(100%);
+            transition: all 0.3s ease;
+        }
+
+        .brand-logos img:hover {
+            filter: grayscale(0%);
+        }
+
+        .brand-logos img[alt="Google"] { height: 30px; }
+        .brand-logos img[alt="Amazon"] { height: 40px; }
+        .brand-logos img[alt="YouTube"] { height: 30px; }
+        .brand-logos img[alt="IBM"] { height: 40px; }
+        .brand-logos img[alt="Infosys"] { height: 35px; }
+        .brand-logos img[alt="Facebook"] { height: 35px; }
+        .brand-logos img[alt="Meta"] { height: 35px; }
+
+        /* Footer */
+        footer {
+            background-color: var(--secondary-color);
+            color: var(--text-light);
+            padding: 30px 0;
+            text-align: center;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <div class="container mx-auto px-4 py-8">
+        <header class="text-center mb-12">
+            <h1 class="text-4xl font-bold text-gray-800 mb-4">Freelancer</h1>
+            <p class="text-gray-600">Your Professional Job Application Platform</p>
+            
+            <div class="theme-selector mt-4">
+                <button class="theme-button" data-theme="corporate">Corporate</button>
+                <button class="theme-button" data-theme="creative">Creative</button>
+                <button class="theme-button" data-theme="minimal">Minimal</button>
+            </div>
+        </header>
+
+        <!-- Profile Form Section -->
+        <div class="max-w-4xl mx-auto bg-white shadow-xl rounded-lg overflow-hidden">
+            <div class="p-6">
+                <h2 class="text-2xl font-semibold text-gray-800 mb-6">Create Your Professional Profile</h2>
+                
+                <form id="profileForm" class="space-y-6" action="thankyou.html" method="GET">
+                    <!-- Personal Info -->
+                    <div class="grid grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">First Name</label>
+                            <input type="text" id="firstName" required class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">Last Name</label>
+                            <input type="text" id="lastName" required class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Professional Email</label>
+                        <input type="email" id="email" required class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3">
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Professional Skills</label>
+                        <div class="flex flex-wrap gap-2" id="skillsContainer">
+                            <input type="text" id="skillInput" placeholder="Add skill" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3">
+                            <button type="button" id="addSkillBtn" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">Add Skill</button>
+                        </div>
+                        <div id="skillsList" class="flex flex-wrap gap-2 mt-2"></div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Resume Upload</label>
+                        <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
+                            <div class="space-y-1 text-center">
+                                <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
+                                    <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                                <div class="flex text-sm text-gray-600">
+                                    <label class="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500">
+                                        <span>Upload Resume</span>
+                                        <input id="resumeUpload" name="resume" type="file" class="sr-only" accept=".pdf,.doc,.docx">
+                                    </label>
+                                </div>
+                                <p class="text-xs text-gray-500">PDF or DOCX up to 10MB</p>
+                            </div>
+                        </div>
+                        <p id="fileName" class="mt-2 text-sm text-gray-500"></p>
+                    </div>
+
+                    <div>
+                        <button type="submit" class="w-full gradient-bg text-white py-3 rounded-md hover:opacity-90 transition-all">
+                            SENT
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Apply for Job Section -->
+        <section id="applyForJob" class="mt-12">
+            <h2 class="text-2xl font-semibold text-gray-800 mb-6">Apply for Jobs</h2>
+            <div class="bg-white shadow-xl rounded-lg overflow-hidden">
+                <div class="p-6">
+                    <h3 class="text-xl font-semibold text-gray-800">Available Job Listings</h3>
+                    <ul id="jobList" class="mt-4 space-y-4">
+                        <!-- Jobs will be displayed here dynamically -->
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const skillInput = document.getElementById('skillInput');
+            const addSkillBtn = document.getElementById('addSkillBtn');
+            const skillsList = document.getElementById('skillsList');
+            const resumeUpload = document.getElementById('resumeUpload');
+            const fileName = document.getElementById('fileName');
+            const profileForm = document.getElementById('profileForm');
+            const themeButtons = document.querySelectorAll('.theme-button');
+            const jobList = document.getElementById('jobList');
+
+            const skills = new Set();
+
+            // Theme Switching Logic
+            themeButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const theme = button.getAttribute('data-theme');
+                    document.body.className = `theme-${theme} ${document.body.className.replace(/theme-\w+/, '')}`;
+                });
+            });
+
+            // Add Skill to Profile
+            addSkillBtn.addEventListener('click', () => {
+                const skill = skillInput.value.trim();
+                if (skill && !skills.has(skill)) {
+                    skills.add(skill);
+                    const skillTag = document.createElement('span');
+                    skillTag.className = 'bg-blue-100 text-blue-800 px-2 py-1 rounded-full text-sm flex items-center';
+                    skillTag.innerHTML = `
+                        ${skill}
+                        <button type="button" class="ml-2 text-blue-500 hover:text-blue-700">✕</button>
+                    `;
+                    skillTag.querySelector('button').addEventListener('click', () => {
+                        skills.delete(skill);
+                        skillsList.removeChild(skillTag);
+                    });
+                    skillsList.appendChild(skillTag);
+                    skillInput.value = '';
+                }
+            });
+
+            // Resume File Change
+            resumeUpload.addEventListener('change', (e) => {
+                const file = e.target.files[0];
+                if (file) {
+                    fileName.textContent = `Selected file: ${file.name}`;
+                }
+            });
+
+            // Display Available Jobs
+            const jobs = [
+                { title: "Software Engineer", company: "TechCorp", description: "Build cutting-edge software solutions.", location: "Remote" },
+                { title: "Product Designer", company: "Designify", description: "Create amazing user interfaces.", location: "San Francisco, CA" },
+                { title: "Marketing Specialist", company: "MarketPro", description: "Lead marketing campaigns and growth.", location: "New York, NY" }
+            ];
+
+            jobs.forEach(job => {
+                const jobItem = document.createElement('li');
+                jobItem.className = 'p-4 border rounded-md hover:bg-gray-50 transition-all';
+                jobItem.innerHTML = `
+                    <h4 class="font-semibold text-lg">${job.title}</h4>
+                    <p class="text-gray-600">${job.company}</p>
+                    <p class="text-gray-500">${job.description}</p>
+                    <p class="text-gray-400 text-sm">${job.location}</p>
+                    <button class="mt-3 bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600" onclick="applyForJob('${job.title}')">Apply Now</button>
+                `;
+                jobList.appendChild(jobItem);
+            });
+        });
+
+        // Function to Handle Job Application
+        function applyForJob(jobTitle) {
+            alert(`You have applied for the position: ${jobTitle}`);
+        }
+    </script>
+</body>
+</html>

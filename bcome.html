@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Freelance Registration</title>
+    <style>
+        :root {
+            --primary-color: #0077cc;  /* Changed to match previous theme */
+            --secondary-color: #333333;
+            --accent-color: #FF6B6B;
+            --text-light: #FFFFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;  /* Updated font to match previous theme */
+            color: var(--secondary-color);
+            background-color: #f4f4f4;  /* Lighter background to align with previous theme */
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background-color: var(--primary-color);
+            padding: 20px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: var(--text-light);
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Hero */
+        .hero {
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero-title {
+            font-size: 48px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .hero-subtitle {
+            font-size: 20px;
+            margin-bottom: 40px;
+        }
+
+        /* Registration Form */
+        .registration-container {
+            max-width: 800px;
+            margin: 40px auto;
+            background: rgba(255,255,255,0.9);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 10px rgba(0,123,255,0.3);
+        }
+
+        .skill-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+
+        .skill-checkbox {
+            display: none;
+        }
+
+        .skill-label {
+            background: #e0e0e0;
+            padding: 10px;
+            text-align: center;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .skill-checkbox:checked + .skill-label {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 7px 14px rgba(0,0,0,0.1);
+        }
+
+        .progress-bar {
+            width: 0;
+            height: 5px;
+            background-color: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+
+        .social-media-links input {
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            border: 2px solid #3498db;
+            width: 100%;
+        }
+
+        @media (max-width: 768px) {
+            .skill-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <div class="logo">Freelance Hub</div>
+            <nav>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Services</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">Join the Freelance Revolution</h1>
+            <p class="hero-subtitle">Sign up to showcase your skills and connect with top clients.</p>
+        </div>
+    </section>
+
+    <div class="registration-container" id="registration">
+        <h1 style="text-align: center; color: var(--primary-color); margin-bottom: 20px;">Freelance Registration</h1>
+
+        <div class="progress-bar" id="progress-bar"></div>
+
+        <form id="freelance-registration-form">
+            <div class="form-group">
+                <input type="text" placeholder="First Name" class="form-input" required>
+            </div>
+            <div class="form-group">
+                <input type="text" placeholder="Last Name" class="form-input" required>
+            </div>
+            <div class="form-group">
+                <input type="tel" placeholder="Phone Number" class="form-input" required>
+            </div>
+            <div class="form-group">
+                <input type="email" placeholder="Email Address" class="form-input" required>
+            </div>
+
+            <div class="form-group">
+                <h3>Select Your Skills</h3>
+                <div class="skill-grid">
+                    <input type="checkbox" id="skill1" class="skill-checkbox" name="skills">
+                    <label for="skill1" class="skill-label">C Programming</label>
+                    <input type="checkbox" id="skill2" class="skill-checkbox" name="skills">
+                    <label for="skill2" class="skill-label">Python</label>
+                    <input type="checkbox" id="skill3" class="skill-checkbox" name="skills">
+                    <label for="skill3" class="skill-label">AI/Machine Learning</label>
+                    <input type="checkbox" id="skill4" class="skill-checkbox" name="skills">
+                    <label for="skill4" class="skill-label">Web Development</label>
+                    <input type="checkbox" id="skill5" class="skill-checkbox" name="skills">
+                    <label for="skill5" class="skill-label">Graphic Design</label>
+                    <input type="checkbox" id="skill6" class="skill-checkbox" name="skills">
+                    <label for="skill6" class="skill-label">Digital Marketing</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <h3>Choose Your Category</h3>
+                <select class="form-input" required>
+                    <option value="">Select Category</option>
+                    <option value="developer">Developer</option>
+                    <option value="designer">Designer</option>
+                    <option value="writer">Writer</option>
+                    <option value="marketing">Marketing</option>
+                    <option value="data-scientist">Data Scientist</option>
+                </select>
+            </div>
+
+            <div class="form-group social-media-links">
+                <input type="url" placeholder="LinkedIn Profile URL" class="form-input">
+                <input type="url" placeholder="GitHub Profile URL" class="form-input">
+            </div>
+
+            <div class="form-group">
+                <textarea placeholder="Brief Professional Summary" class="form-input" rows="4" required></textarea>
+            </div>
+            <div class="form-group">
+                <input type="file" class="form-input" accept="image/*" required>
+            </div>
+            <button type="submit" class="submit-btn">Register for Freelance</button>
+        </form>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Freelance Hub. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Handle form submission and progress bar
+        document.getElementById('freelance-registration-form').addEventListener('input', updateProgressBar);
+        document.getElementById('freelance-registration-form').addEventListener('submit', function(e) {
+            e.preventDefault(); // Prevent form submission to stay on the same page
+            window.location.href = 'dash.html'; // Redirect to dash.html
+        });
+
+        function updateProgressBar() {
+            const totalFields = document.querySelectorAll('.form-input').length;
+            const filledFields = Array.from(document.querySelectorAll('.form-input'))
+                .filter(input => input.value.trim() !== '').length;
+            const progress = Math.min(100, (filledFields / totalFields) * 100);
+            document.getElementById('progress-bar').style.width = progress + '%';
+        }
+    </script>
+</body>
+</html>
