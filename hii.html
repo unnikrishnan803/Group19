@@ -3,170 +3,276 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TalentAI Connect - Smart Project Marketplace</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <title>Freelance Registration</title>
+    <style>
+        /* Global styles */
+        :root {
+            --primary-color: #6A5ACD;
+            --secondary-color: #333333;
+            --accent-color: #FF6B6B;
+            --text-light: #FFFFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            color: var(--secondary-color);
+            background-color: #F5F5F5;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background-color: var(--primary-color);
+            padding: 20px 0;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: var(--text-light);
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Hero */
+        .hero {
+            background-image: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            color: var(--text-light);
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero-title {
+            font-size: 48px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .hero-subtitle {
+            font-size: 20px;
+            margin-bottom: 40px;
+        }
+
+        /* Registration Form */
+        .registration-container {
+            max-width: 800px;
+            margin: 40px auto;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 10px rgba(0, 123, 255, 0.3);
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 7px 14px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--secondary-color);
+            color: var(--text-light);
+            padding: 30px 0;
+            text-align: center;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .close-btn {
+            font-size: 24px;
+            cursor: pointer;
+        }
+    </style>
 </head>
-<body class="bg-gradient-to-br from-blue-50 to-purple-100">
-    <div id="app" class="container mx-auto px-4 py-12">
-        <div class="bg-white shadow-2xl rounded-2xl overflow-hidden transform transition-all hover:scale-105">
-            <div class="bg-gradient-to-r from-blue-600 to-purple-600 p-8 text-center">
-                <h1 class="text-4xl font-extrabold text-white mb-4">Freelancer</h1>
-                <p class="text-blue-100 text-xl">Project Matchmaking Platform</p>
-            </div>
-
-            <div class="p-8">
-                <form @submit.prevent="submitProject" class="space-y-6">
-                    <div class="grid md:grid-cols-2 gap-6">
-                        <div>
-                            <label class="block text-sm font-semibold text-gray-700 mb-2">Project Title</label>
-                            <input 
-                                v-model="projectTitle"
-                                type="text" 
-                                placeholder="Enter project title" 
-                                class="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
-                                required
-                            >
-                        </div>
-
-                        <div>
-                            <label class="block text-sm font-semibold text-gray-700 mb-2">Project Category</label>
-                            <select 
-                                v-model="projectCategory"
-                                class="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
-                                required
-                            >
-                                <option value="">Select Category</option>
-                                <option>Web Development</option>
-                                <option>Mobile App</option>
-                                <option>AI/Machine Learning</option>
-                                <option>Blockchain</option>
-                                <option>Design</option>
-                                
-                            </select>
-                        </div>
-                    </div>
-
-                    <div>
-                        <label class="block text-sm font-semibold text-gray-700 mb-2">Project Description</label>
-                        <textarea 
-                            v-model="projectDescription"
-                            placeholder="AI-Enhanced Description: Describe your project in detail. Our AI will help refine your requirements!"
-                            class="w-full px-4 py-3 border border-gray-300 rounded-md h-40 focus:ring-2 focus:ring-blue-500"
-                            required
-                        ></textarea>
-                        <button 
-                            @click.prevent="enhanceDescription"
-                            class="mt-2 bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600"
-                        >
-                            🤖 AI Description Enhancer
-                        </button>
-                    </div>
-
-                    <div class="grid md:grid-cols-3 gap-6">
-                        <div>
-                            <label class="block text-sm font-semibold text-gray-700 mb-2">Budget Range (USD)</label>
-                            <input 
-                                v-model="projectBudget"
-                                type="number" 
-                                placeholder="Estimated Budget" 
-                                class="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
-                                required
-                            >
-                        </div>
-
-                        <div>
-                            <label class="block text-sm font-semibold text-gray-700 mb-2">Project Deadline</label>
-                            <input 
-                                v-model="projectDeadline"
-                                type="date" 
-                                class="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
-                                required
-                            >
-                        </div>
-
-                        <div>
-                            <label class="block text-sm font-semibold text-gray-700 mb-2">Complexity Level</label>
-                            <select 
-                                v-model="projectComplexity"
-                                class="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500"
-                                required
-                            >
-                                <option value="">Select Complexity</option>
-                                <option>Beginner</option>
-                                <option>Intermediate</option>
-                                <option>Advanced</option>
-                                <option>Expert</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div>
-                        <label class="block text-sm font-semibold text-gray-700 mb-2">Required Skills</label>
-                        <div class="flex flex-wrap gap-2">
-                            <span 
-                                v-for="skill in suggestedSkills" 
-                                :key="skill"
-                                @click="toggleSkill(skill)"
-                                class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full cursor-pointer hover:bg-blue-200"
-                                :class="{'bg-blue-500 text-white': selectedSkills.includes(skill)}"
-                            >
-                                {{ skill }}
-                            </span>
-                        </div>
-                    </div>
-
-                    <div class="text-center">
-                        <button 
-                            type="submit" 
-                            class="w-full md:w-auto bg-gradient-to-r from-blue-600 to-purple-600 text-white px-12 py-4 rounded-lg hover:opacity-90 transition duration-300 text-xl font-bold"
-                        >
-                            🚀 Post Project
-                        </button>
-                    </div>
-                </form>
-            </div>
+<body>
+    <header>
+        <div class="container header-content">
+            <div class="logo">Freelance Hub</div>
+            <nav>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Services</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </nav>
         </div>
+    </header>
 
-        <div class="mt-8 text-center text-gray-600">
-            © 2025 Freelancer 
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">Join the Freelance Revolution</h1>
+            <p class="hero-subtitle">Sign up to showcase your skills and connect with top clients.</p>
+        </div>
+    </section>
+
+    <div class="registration-container" id="registration">
+        <h1 style="text-align: center; color: var(--primary-color); margin-bottom: 20px;">Freelance Registration</h1>
+
+        <form id="freelance-registration-form">
+            <div class="form-group">
+                <input type="text" placeholder="First Name" class="form-input" required>
+            </div>
+            <div class="form-group">
+                <input type="text" placeholder="Last Name" class="form-input" required>
+            </div>
+            <div class="form-group">
+                <input type="email" placeholder="Email Address" class="form-input" required>
+            </div>
+            <div class="form-group">
+                <input type="password" placeholder="Password" class="form-input" id="password" required>
+            </div>
+            <div class="form-group">
+                <input type="date" placeholder="Date of Birth" class="form-input" required>
+            </div>
+
+            <div class="form-group">
+                <h3>Select Your Skills</h3>
+                <div class="skill-grid">
+                    <input type="checkbox" id="skill1" class="skill-checkbox" name="skills">
+                    <label for="skill1" class="skill-label">C Programming</label>
+                    <input type="checkbox" id="skill2" class="skill-checkbox" name="skills">
+                    <label for="skill2" class="skill-label">Python</label>
+                    <input type="checkbox" id="skill3" class="skill-checkbox" name="skills">
+                    <label for="skill3" class="skill-label">AI/Machine Learning</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <h3>Choose Your Category</h3>
+                <select class="form-input" required>
+                    <option value="">Select Category</option>
+                    <option value="developer">Developer</option>
+                    <option value="designer">Designer</option>
+                    <option value="writer">Writer</option>
+                    <option value="marketing">Marketing</option>
+                    <option value="data-scientist">Data Scientist</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <textarea placeholder="Brief Professional Summary" class="form-input" rows="4" required></textarea>
+            </div>
+            <div class="form-group">
+                <input type="file" class="form-input" accept="image/*" required>
+            </div>
+            <button type="submit" class="submit-btn">Register for Freelance</button>
+        </form>
+    </div>
+
+    <!-- Success Modal -->
+    <div class="modal" id="success-modal">
+        <div class="modal-content">
+            <span class="close-btn" id="close-modal">&times;</span>
+            <h2>Registration Successful!</h2>
+            <p>Thank you for registering. We will review your profile and get back to you soon!</p>
         </div>
     </div>
 
+    <footer>
+        <p>&copy; 2025 Freelance Hub. All rights reserved.</p>
+    </footer>
+
     <script>
-        new Vue({
-            el: '#app',
-            data: {
-                projectTitle: '',
-                projectCategory: '',
-                projectDescription: '',
-                projectBudget: null,
-                projectDeadline: null,
-                projectComplexity: '',
-                suggestedSkills: [
-                    'React', 'Python', 'Machine Learning', 
-                    'Cloud Computing', 'Blockchain', 'UI/UX Design'
-                ],
-                selectedSkills: []
-            },
-            methods: {
-                toggleSkill(skill) {
-                    const index = this.selectedSkills.indexOf(skill);
-                    if (index > -1) {
-                        this.selectedSkills.splice(index, 1);
-                    } else {
-                        this.selectedSkills.push(skill);
-                    }
-                },
-                enhanceDescription() {
-                    // Simulated AI enhancement
-                    alert('AI is refining your project description! 🤖✨');
-                },
-                submitProject() {
-                    // Project submission logic
-                    alert('Project Posted Successfully! AI Matching Initiated. 🎉');
-                }
-            }
+        // Handle form submission and redirect
+        document.getElementById('freelance-registration-form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the default form submission
+
+            // Show the success modal
+            document.getElementById('success-modal').style.display = 'flex';
+
+            // After 2 seconds, redirect to dash.html
+            setTimeout(function() {
+                window.location.href = 'dash.html';
+            }, 2000); // 2-second delay
+        });
+
+        // Close the modal
+        document.getElementById('close-modal').addEventListener('click', function() {
+            document.getElementById('success-modal').style.display = 'none';
         });
     </script>
 </body>

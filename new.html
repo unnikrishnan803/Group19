@@ -153,11 +153,8 @@
   <header>
     <h1>Freelancing Platform</h1>
     <nav>
-      <a href="#profiles">Freelancer Profiles</a>
-      <a href="#client-dashboard">Client Dashboards</a>
-      <a href="#ai-matchmaking">AI Matchmaking</a>
-      <a href="#payments">Secure Payments</a>
-      <a href="#communication">Communication Hub</a>
+      <a href="#register">Register</a>
+      <a href="#top-freelancers">Top Freelancers</a>
     </nav>
   </header>
 
@@ -172,16 +169,7 @@
     </form>
   </section>
 
-  <!-- Back Button -->
-  <section id="back-button-section" class="back-button-section" style="text-align: center; margin-top: 20px;">
-    <a href="index.html">
-      <button style="padding: 10px 20px; background-color: var(--primary-color); color: white; border-radius: 6px; border: none; cursor: pointer;">
-        Back to Home
-      </button>
-    </a>
-  </section>
-
-  <!-- Display Top 5 Freelancers -->
+  <!-- Top 5 Freelancers Section -->
   <section id="top-freelancers" class="top-freelancers">
     <h2>Top 5 Freelancers Based on Experience</h2>
     <div class="freelancer-list" id="freelancer-list"></div>
@@ -200,6 +188,12 @@
       const name = document.getElementById("name").value;
       const experience = parseInt(document.getElementById("experience").value);
       const skills = document.getElementById("skills").value.split(',').map(skill => skill.trim());
+
+      // Check if all fields are filled correctly
+      if (!name || isNaN(experience) || !skills.length) {
+        alert("Please fill in all fields correctly.");
+        return;
+      }
 
       // Create a new freelancer object
       const newFreelancer = { name, experience, skills };
@@ -235,7 +229,7 @@
 
         // Create a clickable link to the freelancer details page
         const freelancerLink = document.createElement("a");
-        freelancerLink.href = `freelancer-details.html?name=${encodeURIComponent(freelancer.name)}&experience=${freelancer.experience}&skills=${encodeURIComponent(freelancer.skills.join(', '))}`;
+        freelancerLink.href = `details.html?name=${encodeURIComponent(freelancer.name)}&experience=${freelancer.experience}&skills=${encodeURIComponent(freelancer.skills.join(', '))}`;
         freelancerLink.style.textDecoration = 'none'; // To remove the underline
 
         freelancerCard.innerHTML = `
@@ -252,4 +246,3 @@
   </script>
 </body>
 </html>
-

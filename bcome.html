@@ -5,8 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Freelance Registration</title>
     <style>
+        /* Global styles */
         :root {
-            --primary-color: #0077cc;  /* Changed to match previous theme */
+            --primary-color: #6A5ACD;
             --secondary-color: #333333;
             --accent-color: #FF6B6B;
             --text-light: #FFFFFF;
@@ -19,10 +20,9 @@
         }
 
         body {
-            font-family: 'Arial', sans-serif;  /* Updated font to match previous theme */
+            font-family: 'Roboto', sans-serif;
             color: var(--secondary-color);
-            background-color: #f4f4f4;  /* Lighter background to align with previous theme */
-            line-height: 1.6;
+            background-color: #F5F5F5;
         }
 
         .container {
@@ -35,7 +35,6 @@
         header {
             background-color: var(--primary-color);
             padding: 20px 0;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
         .header-content {
@@ -68,7 +67,7 @@
 
         /* Hero */
         .hero {
-            background-color: var(--primary-color);
+            background-image: linear-gradient(to right, var(--primary-color), var(--secondary-color));
             color: var(--text-light);
             padding: 100px 0;
             text-align: center;
@@ -94,10 +93,10 @@
         .registration-container {
             max-width: 800px;
             margin: 40px auto;
-            background: rgba(255,255,255,0.9);
+            background: rgba(255, 255, 255, 0.9);
             padding: 40px;
             border-radius: 15px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
         }
 
         .form-group {
@@ -110,12 +109,13 @@
             border: 2px solid #ddd;
             border-radius: 8px;
             transition: all 0.3s ease;
+            padding-left: 40px;
         }
 
         .form-input:focus {
             outline: none;
             border-color: var(--primary-color);
-            box-shadow: 0 0 10px rgba(0,123,255,0.3);
+            box-shadow: 0 0 10px rgba(0, 123, 255, 0.3);
         }
 
         .skill-grid {
@@ -155,29 +155,17 @@
 
         .submit-btn:hover {
             transform: translateY(-3px);
-            box-shadow: 0 7px 14px rgba(0,0,0,0.1);
+            box-shadow: 0 7px 14px rgba(0, 0, 0, 0.1);
         }
 
-        .progress-bar {
-            width: 0;
-            height: 5px;
-            background-color: var(--primary-color);
-            transition: width 0.3s ease;
+        /* Footer */
+        footer {
+            background-color: var(--secondary-color);
+            color: var(--text-light);
+            padding: 30px 0;
+            text-align: center;
         }
 
-        .social-media-links input {
-            margin-bottom: 10px;
-            padding: 10px;
-            border-radius: 5px;
-            border: 2px solid #3498db;
-            width: 100%;
-        }
-
-        @media (max-width: 768px) {
-            .skill-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
     </style>
 </head>
 <body>
@@ -220,6 +208,13 @@
             <div class="form-group">
                 <input type="email" placeholder="Email Address" class="form-input" required>
             </div>
+            <div class="form-group">
+                <input type="password" placeholder="Password" class="form-input" id="password" required>
+                <div class="password-strength" id="password-strength"></div>
+            </div>
+            <div class="form-group">
+                <input type="date" placeholder="Date of Birth" class="form-input" required>
+            </div>
 
             <div class="form-group">
                 <h3>Select Your Skills</h3>
@@ -230,12 +225,6 @@
                     <label for="skill2" class="skill-label">Python</label>
                     <input type="checkbox" id="skill3" class="skill-checkbox" name="skills">
                     <label for="skill3" class="skill-label">AI/Machine Learning</label>
-                    <input type="checkbox" id="skill4" class="skill-checkbox" name="skills">
-                    <label for="skill4" class="skill-label">Web Development</label>
-                    <input type="checkbox" id="skill5" class="skill-checkbox" name="skills">
-                    <label for="skill5" class="skill-label">Graphic Design</label>
-                    <input type="checkbox" id="skill6" class="skill-checkbox" name="skills">
-                    <label for="skill6" class="skill-label">Digital Marketing</label>
                 </div>
             </div>
 
@@ -252,8 +241,10 @@
             </div>
 
             <div class="form-group social-media-links">
-                <input type="url" placeholder="LinkedIn Profile URL" class="form-input">
-                <input type="url" placeholder="GitHub Profile URL" class="form-input">
+                <div class="social-media-icons">
+                    <a href="#" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    <a href="#" title="GitHub"><i class="fab fa-github"></i></a>
+                </div>
             </div>
 
             <div class="form-group">
@@ -266,25 +257,37 @@
         </form>
     </div>
 
+    <!-- Success Modal -->
+    <div class="modal" id="success-modal">
+        <div class="modal-content">
+            <span class="close-btn" id="close-modal">&times;</span>
+            <h2>Registration Successful!</h2>
+            <p>Thank you for registering. We will review your profile and get back to you soon!</p>
+        </div>
+    </div>
+
     <footer>
         <p>&copy; 2025 Freelance Hub. All rights reserved.</p>
     </footer>
 
     <script>
-        // Handle form submission and progress bar
-        document.getElementById('freelance-registration-form').addEventListener('input', updateProgressBar);
-        document.getElementById('freelance-registration-form').addEventListener('submit', function(e) {
-            e.preventDefault(); // Prevent form submission to stay on the same page
-            window.location.href = 'dash.html'; // Redirect to dash.html
+        // JavaScript for handling the form submission and redirecting to dash.html
+        document.getElementById('freelance-registration-form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the default form submission
+
+            // Show the success modal
+            document.getElementById('success-modal').style.display = 'flex';
+
+            // After showing the modal, redirect to dash.html after 2 seconds
+            setTimeout(function() {
+                window.location.href = 'dash.html'; // Redirect to dash.html
+            }, 2000); // 2 seconds delay before redirect
         });
 
-        function updateProgressBar() {
-            const totalFields = document.querySelectorAll('.form-input').length;
-            const filledFields = Array.from(document.querySelectorAll('.form-input'))
-                .filter(input => input.value.trim() !== '').length;
-            const progress = Math.min(100, (filledFields / totalFields) * 100);
-            document.getElementById('progress-bar').style.width = progress + '%';
-        }
+        // Close the modal when clicked on close button
+        document.getElementById('close-modal').addEventListener('click', function() {
+            document.getElementById('success-modal').style.display = 'none';
+        });
     </script>
 </body>
 </html>
